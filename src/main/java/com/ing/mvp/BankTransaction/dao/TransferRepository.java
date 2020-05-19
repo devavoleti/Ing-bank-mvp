@@ -65,7 +65,7 @@ public class TransferRepository {
 
 	public Account getAccountBalance(String act) {
 
-		String sql = "select * from account WHERE act_no = ?";
+ 		String sql = "select * from account WHERE act_no = ?";
 		Account account = (Account) jdbcTemplate.queryForObject(sql, new Object[] { act },
 				(rs, rowNum) -> new Account(rs.getLong("ID"), rs.getString("act_type"), rs.getString("act_no"),
 						rs.getLong("balance"), rs.getLong("cust_Id")));
@@ -78,6 +78,23 @@ public class TransferRepository {
 		 Optional<Long> balance = Optional.of(jdbcTemplate.queryForObject(sql, new Object[]{custId}, long.class));
 		System.out.println("Customer Balance -- "+balance);
 		return balance;
+	}
+	
+	public List<Transaction> getTransactionHistory(String custId){
+		
+		String sql = "select * from Transaction ts where ts.act_no =(select a.act_no from account a , customer c where a.cust_id = c.id and c.id = ?)";
+		List<Transaction> transaction = (List<Transaction>) jdbcTemplate.queryForObject(sql, new Object[] { custId },
+				(rs, rowNum) -> new Transaction(rs.getLong("ID"),
+						rs.getString("txn_type"),
+						rs.getString("act_no"),
+						rs.getLong("txn_amount"),
+						rs.getTimestamp("txn_date").toLocalDateTime()));
+		System.out.println("get transaction ");
+		
+		return transaction;
+		
+		
+		
 	}
 	
 

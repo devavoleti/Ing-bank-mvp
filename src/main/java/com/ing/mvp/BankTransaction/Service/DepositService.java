@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.ing.mvp.BankTransaction.Exception.ResourceNotFoundException;
 import com.ing.mvp.BankTransaction.model.Account;
+import com.ing.mvp.BankTransaction.model.Transaction;
 
 public interface DepositService {
 
@@ -13,5 +14,7 @@ public interface DepositService {
 	List<Account> depositMoney(String srcAct, String destAct, long amount) throws ResourceNotFoundException, Exception;
 
 	Optional<Long> getCustomerAccountBalance(String custId);
+
+	List<Transaction> getCustomerTransactionHistory(String id);
 	
 }

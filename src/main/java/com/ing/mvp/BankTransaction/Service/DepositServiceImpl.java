@@ -70,4 +70,13 @@ public class DepositServiceImpl implements DepositService {
 		  return customerAccountBalance;
 	}
 
+	@Override
+	public List<Transaction> getCustomerTransactionHistory(String id) {
+		// TODO Auto-generated method stub
+		
+		transferRepo.getTransactionHistory(id);
+		
+		return null;
+	}
+
 }

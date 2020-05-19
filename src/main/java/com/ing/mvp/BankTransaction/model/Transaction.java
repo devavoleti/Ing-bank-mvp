@@ -25,6 +25,22 @@ public class Transaction {
 	@Column(name = "txn_date")
 	private LocalDateTime transactionDateTime;
 
+	
+	
+	public Transaction(Long id, String transactionType, String accountNumber, long transactionAmount,
+			LocalDateTime transactionDateTime) {
+		super();
+		this.id = id;
+		this.transactionType = transactionType;
+		this.accountNumber = accountNumber;
+		this.transactionAmount = transactionAmount;
+		this.transactionDateTime = transactionDateTime;
+	}
+
+	public Transaction() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Long getId() {
 		return id;
 	}

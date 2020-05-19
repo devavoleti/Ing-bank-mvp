@@ -51,7 +51,16 @@ public class DepositController {
 	}
 	
 	
-	
+	@ApiOperation(value = "/getTransactionHistory")
+	@RequestMapping(value = "/getTransactionHistory/customerId/{id}",method = RequestMethod.PUT)
+	public ResponseEntity<Optional<Long>> getTransactionHistory(@PathVariable(value = "id") String id) throws Exception {
+		
+		//Optional<Long> customerAccountBalance = despositService.getCustomerAccountBalance(id);
+		//customerAccountBalance.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + id));
+		//return ResponseEntity.ok(customerAccountBalance);
+		despositService.getCustomerTransactionHistory(id);
+		return null;
+	}
 	
 	
 	
