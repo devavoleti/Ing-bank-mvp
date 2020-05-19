@@ -3,6 +3,7 @@ package com.ing.mvp.BankTransaction.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,10 +64,10 @@ public class DepositServiceImpl implements DepositService {
 	}
 
 	@Override
-	public BigDecimal getBalance(String act) {
+	public Optional<Long> getCustomerAccountBalance(String custId) {
 		// TODO Auto-generated method stub
-		// return transferRepo.getBalance(act);
-		return null;
+		 Optional<Long> customerAccountBalance = transferRepo.getCustomerAccountBalance(custId);
+		  return customerAccountBalance;
 	}
 
 }

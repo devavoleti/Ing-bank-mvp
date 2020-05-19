@@ -1,6 +1,7 @@
 package com.ing.mvp.BankTransaction.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ing.mvp.BankTransaction.Exception.NotAcceptableException;
+import com.ing.mvp.BankTransaction.Exception.ResourceNotFoundException;
 import com.ing.mvp.BankTransaction.Service.DepositService;
 import com.ing.mvp.BankTransaction.model.Account;
 
@@ -38,6 +40,17 @@ public class DepositController {
 		
 		return ResponseEntity.ok(accounts);
 	}
+	
+	@ApiOperation(value = "/getBalance")
+	@RequestMapping(value = "/getBalance/customerId/{id}",method = RequestMethod.PUT)
+	public ResponseEntity<Optional<Long>> getAccountBalance(@PathVariable(value = "id") String id) throws Exception {
+		
+		Optional<Long> customerAccountBalance = despositService.getCustomerAccountBalance(id);
+		customerAccountBalance.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + id));
+		return ResponseEntity.ok(customerAccountBalance);
+	}
+	
+	
 	
 	
 	

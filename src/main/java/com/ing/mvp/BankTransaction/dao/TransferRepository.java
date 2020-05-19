@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -70,5 +71,14 @@ public class TransferRepository {
 						rs.getLong("balance"), rs.getLong("cust_Id")));
 		return account;
 	}
+	
+	public Optional<Long> getCustomerAccountBalance(String custId) {
+
+		String sql = "select balance from account WHERE cust_id = ?";
+		 Optional<Long> balance = Optional.of(jdbcTemplate.queryForObject(sql, new Object[]{custId}, long.class));
+		System.out.println("Customer Balance -- "+balance);
+		return balance;
+	}
+	
 
 }
