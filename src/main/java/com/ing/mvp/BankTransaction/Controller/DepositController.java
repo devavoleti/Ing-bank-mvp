@@ -41,20 +41,20 @@ public class DepositController {
 			throw new NotAcceptableException("Amount to be deposited is less than min value (0.01 Euros)");
 		}
 		
-		List<Account> accounts = despositService.depositMoney(toAct,fromAct,longAmt);
+		List<Account> accounts = despositService.depositMoney(fromAct,toAct,longAmt);
 		LOG.info("inside DepositController :: depositMoney Completed ");
 		return ResponseEntity.ok(accounts);
 	}
 	
 	@ApiOperation(value = "/getBalance")
 	@RequestMapping(value = "/getBalance/customerId/{id}",method = RequestMethod.PUT)
-	public ResponseEntity<Optional<Long>> getAccountBalance(@PathVariable(value = "id") String id) throws Exception {
+	public ResponseEntity<Long> getAccountBalance(@PathVariable(value = "id") String id) throws Exception {
 		
 		LOG.info("inside DepositController :: getAccountBalance for the customer with id '{}' ",id);
 		Optional<Long> customerAccountBalance = despositService.getCustomerAccountBalance(id);
 		customerAccountBalance.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + id));
 		LOG.info("inside DepositController :: retrieved accountBalance '{}' ",customerAccountBalance);
-		return ResponseEntity.ok(customerAccountBalance);
+		return ResponseEntity.of(customerAccountBalance);
 	}
 	
 	

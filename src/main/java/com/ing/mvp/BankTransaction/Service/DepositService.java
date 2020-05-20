@@ -13,8 +13,8 @@ public interface DepositService {
 
 	List<Account> depositMoney(String srcAct, String destAct, long amount) throws ResourceNotFoundException, Exception;
 
-	Optional<Long> getCustomerAccountBalance(String custId);
+	Optional<Long> getCustomerAccountBalance(String custId) throws ResourceNotFoundException;
 
-	List<Transaction> getCustomerTransactionHistory(String id);
+	List<Transaction> getCustomerTransactionHistory(String id) throws ResourceNotFoundException;
 	
 }

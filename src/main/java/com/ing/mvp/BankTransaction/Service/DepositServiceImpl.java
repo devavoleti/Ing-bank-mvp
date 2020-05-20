@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ing.mvp.BankTransaction.Exception.NotAcceptableException;
+import com.ing.mvp.BankTransaction.Exception.ResourceNotFoundException;
 import com.ing.mvp.BankTransaction.dao.TransferRepository;
 import com.ing.mvp.BankTransaction.model.Account;
 import com.ing.mvp.BankTransaction.model.Transaction;
@@ -71,7 +72,7 @@ public class DepositServiceImpl implements DepositService {
 	}
 
 	@Override
-	public Optional<Long> getCustomerAccountBalance(String custId) {
+	public Optional<Long> getCustomerAccountBalance(String custId) throws ResourceNotFoundException {
 		LOG.info("Inside DepositServiceImpl :: getCustomerAccountBalance {} ",custId);
 		Optional<Long> customerAccountBalance = transferRepo.getCustomerAccountBalance(custId);
 		LOG.info("Inside DepositServiceImpl :: retrieved CustomerAccountBalance {} ",customerAccountBalance);
@@ -79,7 +80,7 @@ public class DepositServiceImpl implements DepositService {
 	}
 
 	@Override
-	public List<Transaction> getCustomerTransactionHistory(String id) {
+	public List<Transaction> getCustomerTransactionHistory(String id) throws ResourceNotFoundException {
 		LOG.info("Inside DepositServiceImpl :: getCustomerTransactionHistory {} ",id);
 		List<Transaction> transactionHistory = transferRepo.getTransactionHistory(id);
 		LOG.info("Inside DepositServiceImpl :: retrieved CustomerTransactionHistory {} ",transactionHistory);
